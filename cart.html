@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Panier — Maison [Nombre]</title>
+
+  <meta name="description" content="Votre panier Maison [Nombre] — récapitulatif, TVA et total.">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Panier — Maison [Nombre]">
+  <meta property="og:description" content="Votre panier Maison [Nombre] — récapitulatif, TVA et total.">
+  <meta property="og:image" content="[Placeholder: URL de imagen social]">
+
+  <link rel="canonical" href="[Placeholder: URL canónica de la vista]">
+  <link rel="icon" type="image/svg+xml" href="[Placeholder: favicon.svg]">
+
+  <!-- Tailwind CSS v4 por CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-white text-slate-900 font-sans antialiased flex min-h-screen flex-col">
+
+  <!-- ════════════════════════════════════════════════════════════
+       HEADER / NAVBAR (REUTILIZABLE — idéntico a base.html)
+       ──────────────────────────────────────────────────────────── -->
+  <header class="sticky top-0 z-50 bg-white border-b border-neutral-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between gap-4">
+
+        <a href="index.html" class="shrink-0 flex items-baseline gap-1">
+          <span class="font-serif text-xl font-semibold tracking-wide">Maison</span>
+          <span class="sr-only">Maison — Página de inicio</span>
+        </a>
+
+        <div class="hidden flex-1 justify-center px-6 md:flex">
+          <label for="site-search" class="sr-only">Buscar en la tienda</label>
+          <input
+            id="site-search"
+            type="search"
+            name="q"
+            placeholder="Rechercher…"
+            class="w-full max-w-md border border-gray-300 focus:border-slate-900 focus:ring-1 focus:ring-slate-900 rounded-none px-4 py-2 text-sm outline-none transition-all"
+          >
+        </div>
+
+        <nav id="main-nav" aria-label="Navegación principal" class="hidden items-center gap-6 text-xs font-semibold uppercase tracking-widest md:flex">
+          <a href="index.html" class="hover:text-slate-500 transition-colors">Accueil</a>
+          <a href="catalogue.html" class="hover:text-slate-500 transition-colors">Catalogue</a>
+          <a href="product.html" class="hover:text-slate-500 transition-colors">Produit</a>
+          <a href="cart.html" class="hover:text-slate-500 transition-colors">Panier</a>
+          <a href="checkout.html" class="hover:text-slate-500 transition-colors">Paiement</a>
+        </nav>
+
+        <div class="flex shrink-0 items-center gap-4 text-slate-900">
+          <a href="#" class="hover:text-slate-500 transition-colors" aria-label="Mi cuenta (enlace de ejemplo)">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.5 20.25a7.5 7.5 0 0115 0Z" />
+            </svg>
+          </a>
+          <a href="#" class="hover:text-slate-500 transition-colors" aria-label="Favoritos (enlace de ejemplo)">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+            </svg>
+          </a>
+          <a href="cart.html" class="relative hover:text-slate-500 transition-colors" aria-label="Carrito de compra">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007z" />
+            </svg>
+          </a>
+          <button
+            id="menu-toggle"
+            type="button"
+            class="md:hidden"
+            aria-controls="mobile-menu"
+            aria-expanded="false"
+            aria-label="Abrir menú de navegación"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="mobile-menu" hidden class="md:hidden border-t border-neutral-200 bg-white">
+      <nav aria-label="Navegación móvil" class="flex flex-col gap-3 px-4 py-4 text-xs font-semibold uppercase tracking-widest">
+        <a href="index.html" class="hover:text-slate-500 transition-colors">Accueil</a>
+        <a href="catalogue.html" class="hover:text-slate-500 transition-colors">Catalogue</a>
+        <a href="product.html" class="hover:text-slate-500 transition-colors">Produit</a>
+        <a href="cart.html" class="hover:text-slate-500 transition-colors">Panier</a>
+        <a href="checkout.html" class="hover:text-slate-500 transition-colors">Paiement</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ════════════════════════════════════════════════════════════
+       MAIN — VISTA CARRITO (contenido a implementar en siguiente fase)
+       ──────────────────────────────────────────────────────────── -->
+  <main id="site-main" class="flex-1">
+    <h1 class="sr-only">Panier — Maison [Nombre]</h1>
+    <!-- [Carrito: tabla 3 items + resumen de compra] -->
+  </main>
+
+  <!-- ════════════════════════════════════════════════════════════
+       FOOTER (REUTILIZABLE — idéntico a base.html)
+       ──────────────────────────────────────────────────────────── -->
+  <footer class="bg-slate-900 text-slate-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
+
+        <div>
+          <h2 class="mb-4 text-xs font-semibold uppercase tracking-widest text-white">Catégories</h2>
+          <ul class="space-y-2 text-sm">
+            <li><a href="catalogue.html" class="transition-colors hover:text-white">Chaussures</a></li>
+            <li><a href="catalogue.html" class="transition-colors hover:text-white">Chemises</a></li>
+            <li><a href="catalogue.html" class="transition-colors hover:text-white">Pantalons</a></li>
+            <li><a href="catalogue.html" class="transition-colors hover:text-white">Accessoires</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="mb-4 text-xs font-semibold uppercase tracking-widest text-white">Légal</h2>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" class="transition-colors hover:text-white">Conditions générales</a></li>
+            <li><a href="#" class="transition-colors hover:text-white">Politique de confidentialité</a></li>
+            <li><a href="#" class="transition-colors hover:text-white">À propos de la marque</a></li>
+          </ul>
+        </div>
+
+        <div class="sm:col-span-2">
+          <h2 class="mb-4 text-xs font-semibold uppercase tracking-widest text-white">Newsletter</h2>
+          <p class="mb-4 text-sm">Recevez nos nouveautés et offres exclusives.</p>
+          <form class="flex max-w-md flex-col gap-2 sm:flex-row">
+            <label for="newsletter-email" class="sr-only">Correo electrónico</label>
+            <input
+              id="newsletter-email"
+              type="email"
+              name="email"
+              placeholder="Votre e-mail"
+              autocomplete="email"
+              class="w-full border border-slate-600 bg-transparent px-4 py-2 text-sm text-white placeholder-slate-400 outline-none transition-all focus:border-white focus:ring-1 focus:ring-white"
+            >
+            <button type="submit" class="shrink-0 bg-white px-6 py-2 text-xs font-semibold uppercase tracking-widest text-slate-900 transition-colors hover:bg-slate-200">
+              S'abonner
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="mt-10 flex flex-col items-center justify-between gap-4 border-t border-slate-700 pt-6 text-xs sm:flex-row">
+        <p>© 2026 Maison [Nombre]. Tous droits réservés.</p>
+        <ul class="flex gap-6">
+          <li><a href="#" class="transition-colors hover:text-white" aria-label="Instagram (enlace de ejemplo)">Instagram</a></li>
+          <li><a href="#" class="transition-colors hover:text-white" aria-label="Facebook (enlace de ejemplo)">Facebook</a></li>
+          <li><a href="#" class="transition-colors hover:text-white" aria-label="Pinterest (enlace de ejemplo)">Pinterest</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JS vanilla mínimo: toggle menú móvil -->
+  <script>
+    const toggle = document.getElementById('menu-toggle');
+    const menu   = document.getElementById('mobile-menu');
+    if (toggle && menu) {
+      toggle.addEventListener('click', () => {
+        const expanded = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!expanded));
+        menu.hidden = expanded;
+      });
+    }
+  </script>
+</body>
+</html>
