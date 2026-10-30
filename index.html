@@ -114,9 +114,199 @@
        MAIN (CONTENIDO DE LA VISTA HOME)
        ──────────────────────────────────────────────────────────── -->
   <main id="site-main" class="flex-1">
-    <h1 class="sr-only">Accueil — Maison [Nombre]</h1>
-    <!-- [Home: hero + listados horizontales de productos] -->
-  </main>
+
+  <!-- HERO -->
+  <section class="relative min-h-[550px] md:min-h-[650px] flex items-center bg-neutral-100">
+
+    <img
+      src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=2000&q=85"
+      alt="Collection de mode française de saison"
+      class="absolute inset-0 w-full h-full object-cover"
+    >
+
+    <div class="absolute inset-0 bg-black/25"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto w-full px-6 lg:px-8">
+      <div class="max-w-xl text-white">
+
+        <p class="text-xs uppercase tracking-[0.3em] mb-5">
+          Collection Automne / Hiver
+        </p>
+
+        <h1 class="font-serif text-4xl md:text-6xl leading-tight mb-6">
+          La nouvelle saison, en mouvement
+        </h1>
+
+        <p class="text-base md:text-lg mb-8 max-w-md">
+          Découvrez une collection pensée pour accompagner
+          chaque moment avec élégance.
+        </p>
+
+        <a
+          href="catalogue.html"
+          class="inline-block bg-white text-slate-900 px-8 py-4 text-xs uppercase tracking-widest font-semibold hover:bg-slate-200 transition-colors"
+        >
+          Découvrir la collection
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- NOUVEAUTÉS -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+
+    <div class="flex justify-between items-end mb-10">
+      <div>
+        <p class="text-xs uppercase tracking-widest text-gray-500 mb-3">
+          À découvrir
+        </p>
+        <h2 class="font-serif text-3xl md:text-4xl">
+          Nouveautés
+        </h2>
+      </div>
+
+      <a
+        href="catalogue.html"
+        class="text-xs uppercase tracking-widest border-b border-slate-900 pb-1 hover:text-gray-500"
+      >
+        Tout découvrir
+      </a>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+
+      <a href="catalogue.html" class="group">
+        <div class="aspect-[3/4] overflow-hidden bg-gray-100 mb-4">
+          <img
+            src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=700&q=80"
+            alt="Tenue féminine de la nouvelle collection"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          >
+        </div>
+        <h3 class="text-sm font-medium">Veste élégante</h3>
+        <p class="text-sm text-gray-500 mt-1">129,00 €</p>
+      </a>
+
+      <a href="catalogue.html" class="group">
+        <div class="aspect-[3/4] overflow-hidden bg-gray-100 mb-4">
+          <img
+            src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=700&q=80"
+            alt="Look contemporain de la collection"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          >
+        </div>
+        <h3 class="text-sm font-medium">Ensemble moderne</h3>
+        <p class="text-sm text-gray-500 mt-1">159,00 €</p>
+      </a>
+
+      <a href="catalogue.html" class="group">
+        <div class="aspect-[3/4] overflow-hidden bg-gray-100 mb-4">
+          <img
+            src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=700&q=80"
+            alt="Silhouette de mode féminine"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          >
+        </div>
+        <h3 class="text-sm font-medium">Robe de saison</h3>
+        <p class="text-sm text-gray-500 mt-1">119,00 €</p>
+      </a>
+
+      <a href="catalogue.html" class="group">
+        <div class="aspect-[3/4] overflow-hidden bg-gray-100 mb-4">
+          <img
+            src="https://images.unsplash.com/photo-1548624149-f3213f6b6f42?auto=format&fit=crop&w=700&q=80"
+            alt="Pièce de mode de la nouvelle collection"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          >
+        </div>
+        <h3 class="text-sm font-medium">Pièce intemporelle</h3>
+        <p class="text-sm text-gray-500 mt-1">89,00 €</p>
+      </a>
+
+    </div>
+  </section>
+
+
+  <!-- LES INCONTOURNABLES -->
+  <section class="bg-neutral-50 py-16 md:py-24">
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="flex justify-between items-end mb-10">
+        <div>
+          <p class="text-xs uppercase tracking-widest text-gray-500 mb-3">
+            Nos favoris
+          </p>
+          <h2 class="font-serif text-3xl md:text-4xl">
+            Les incontournables
+          </h2>
+        </div>
+
+        <a
+          href="catalogue.html"
+          class="text-xs uppercase tracking-widest border-b border-slate-900 pb-1 hover:text-gray-500"
+        >
+          Voir tout
+        </a>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+
+        <a href="catalogue.html" class="group">
+          <div class="aspect-[3/4] overflow-hidden bg-gray-100 mb-4">
+            <img
+              src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=700&q=80"
+              alt="Veste classique intemporelle"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            >
+          </div>
+          <h3 class="text-sm font-medium">Veste classique</h3>
+          <p class="text-sm text-gray-500 mt-1">145,00 €</p>
+        </a>
+
+        <a href="catalogue.html" class="group">
+          <div class="aspect-[3/4] overflow-hidden bg-gray-100 mb-4">
+            <img
+              src="https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=700&q=80"
+              alt="Chemise élégante"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            >
+          </div>
+          <h3 class="text-sm font-medium">Chemise essentielle</h3>
+          <p class="text-sm text-gray-500 mt-1">79,00 €</p>
+        </a>
+
+        <a href="catalogue.html" class="group">
+          <div class="aspect-[3/4] overflow-hidden bg-gray-100 mb-4">
+            <img
+              src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=700&q=80"
+              alt="Pantalon de coupe classique"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            >
+          </div>
+          <h3 class="text-sm font-medium">Pantalon signature</h3>
+          <p class="text-sm text-gray-500 mt-1">99,00 €</p>
+        </a>
+
+        <a href="catalogue.html" class="group">
+          <div class="aspect-[3/4] overflow-hidden bg-gray-100 mb-4">
+            <img
+              src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=700&q=80"
+              alt="Sac élégant de la collection"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            >
+          </div>
+          <h3 class="text-sm font-medium">Sac intemporel</h3>
+          <p class="text-sm text-gray-500 mt-1">110,00 €</p>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+</main>
 
   <!-- ════════════════════════════════════════════════════════════
        FOOTER (REUTILIZABLE)
