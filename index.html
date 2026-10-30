@@ -4,36 +4,39 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Accueil — Maison [Nombre]</title>
+  <title>Accueil — Maison</title>
 
-  <meta name="description" content="Maison [Nombre] — Nouveautés et incontournables de la mode française.">
+  <meta name="description" content="Maison, prêt-à-porter français : nouveautés, incontournables et collections de saison.">
 
-  <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Accueil — Maison [Nombre]">
-  <meta property="og:description" content="Maison [Nombre] — Nouveautés et incontournables de la mode française.">
+  <meta property="og:title" content="Accueil — Maison">
+  <meta property="og:description" content="Maison, prêt-à-porter français : nouveautés, incontournables et collections de saison.">
   <meta property="og:image" content="[Placeholder: URL de imagen social]">
 
   <link rel="canonical" href="[Placeholder: URL canónica de la vista]">
+
   <link rel="icon" type="image/svg+xml" href="[Placeholder: favicon.svg]">
 
-  <!-- Tailwind CSS v4 por CDN -->
+  <!-- Tailwind CSS v4 por CDN (obligatorio) -->
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 <body class="bg-white text-slate-900 font-sans antialiased flex min-h-screen flex-col">
 
   <!-- ════════════════════════════════════════════════════════════
-       HEADER / NAVBAR (REUTILIZABLE — idéntico a base.html)
+       HEADER / NAVBAR (REUTILIZABLE)
+       Idéntico a docs/reference/base.html
        ──────────────────────────────────────────────────────────── -->
   <header class="sticky top-0 z-50 bg-white border-b border-neutral-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex h-16 items-center justify-between gap-4">
 
+        <!-- Logo de la marca -->
         <a href="index.html" class="shrink-0 flex items-baseline gap-1">
-          <span class="font-serif text-xl font-semibold tracking-wide">Maison</span>
+          <span id="brand-name" class="font-serif text-xl font-semibold tracking-wide">Maison</span>
           <span class="sr-only">Maison — Página de inicio</span>
         </a>
 
+        <!-- Barra de búsqueda -->
         <div class="hidden flex-1 justify-center px-6 md:flex">
           <label for="site-search" class="sr-only">Buscar en la tienda</label>
           <input
@@ -45,6 +48,7 @@
           >
         </div>
 
+        <!-- Menú principal (escritorio) -->
         <nav id="main-nav" aria-label="Navegación principal" class="hidden items-center gap-6 text-xs font-semibold uppercase tracking-widest md:flex">
           <a href="index.html" class="hover:text-slate-500 transition-colors">Accueil</a>
           <a href="catalogue.html" class="hover:text-slate-500 transition-colors">Catalogue</a>
@@ -53,22 +57,31 @@
           <a href="checkout.html" class="hover:text-slate-500 transition-colors">Paiement</a>
         </nav>
 
+        <!-- Iconos cuenta / favoritos / carrito + toggle móvil -->
         <div class="flex shrink-0 items-center gap-4 text-slate-900">
+
+          <!-- Cuenta / usuario -->
           <a href="#" class="hover:text-slate-500 transition-colors" aria-label="Mi cuenta (enlace de ejemplo)">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.5 20.25a7.5 7.5 0 0115 0Z" />
             </svg>
           </a>
+
+          <!-- Favoritos -->
           <a href="#" class="hover:text-slate-500 transition-colors" aria-label="Favoritos (enlace de ejemplo)">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
             </svg>
           </a>
+
+          <!-- Carrito -->
           <a href="cart.html" class="relative hover:text-slate-500 transition-colors" aria-label="Carrito de compra">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007z" />
             </svg>
           </a>
+
+          <!-- Botón toggle menú móvil -->
           <button
             id="menu-toggle"
             type="button"
@@ -85,6 +98,7 @@
       </div>
     </div>
 
+    <!-- Menú móvil (oculto por defecto; toggle con JS vanilla al final de la página) -->
     <div id="mobile-menu" hidden class="md:hidden border-t border-neutral-200 bg-white">
       <nav aria-label="Navegación móvil" class="flex flex-col gap-3 px-4 py-4 text-xs font-semibold uppercase tracking-widest">
         <a href="index.html" class="hover:text-slate-500 transition-colors">Accueil</a>
@@ -97,170 +111,22 @@
   </header>
 
   <!-- ════════════════════════════════════════════════════════════
-       MAIN — VISTA HOME (contenido a implementar en siguiente fase)
+       MAIN (CONTENIDO DE LA VISTA HOME)
        ──────────────────────────────────────────────────────────── -->
   <main id="site-main" class="flex-1">
-    <section
-      aria-labelledby="home-title"
-      class="relative isolate min-h-[480px] overflow-hidden bg-slate-900 sm:min-h-[520px] lg:min-h-[600px]"
-    >
-      <img
-        src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=2400&q=85"
-        alt="Silhouette portant une tenue de mode contemporaine"
-        fetchpriority="high"
-        class="absolute inset-0 h-full w-full object-cover object-[center_38%]"
-      >
-
-      <div aria-hidden="true" class="absolute inset-0 bg-slate-950/40"></div>
-
-      <div class="relative mx-auto flex min-h-[480px] max-w-7xl items-end px-4 pb-12 sm:min-h-[520px] sm:px-6 sm:pb-16 lg:min-h-[600px] lg:px-8 lg:pb-20">
-        <div class="max-w-2xl text-white">
-          <p class="text-xs font-semibold uppercase tracking-widest sm:text-sm">
-            Collection printemps-été
-          </p>
-
-          <h1 id="home-title" class="mt-4 max-w-xl font-serif text-4xl font-medium leading-tight sm:text-5xl lg:text-6xl">
-            La nouvelle saison, en mouvement
-          </h1>
-
-          <p class="mt-4 max-w-lg text-base leading-relaxed sm:text-lg">
-            Des silhouettes contemporaines et des pièces essentielles pour accompagner chaque jour.
-          </p>
-
-          <a
-            href="catalogue.html"
-            class="mt-7 inline-flex min-h-12 items-center justify-center bg-white px-6 py-3 text-xs font-semibold uppercase tracking-widest text-slate-900 transition-colors hover:bg-neutral-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
-          >
-            Découvrir le catalogue
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <section aria-labelledby="new-arrivals-title" class="py-14 sm:py-16 lg:py-20">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <h2 id="new-arrivals-title" class="mb-8 font-serif text-3xl text-slate-900">
-          Nouveautés
-        </h2>
-
-        <ul tabindex="0" aria-label="Nouveautés" class="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-slate-900 md:grid md:grid-cols-2 md:overflow-visible md:pb-0 lg:grid-cols-4">
-          <li class="w-[78%] shrink-0 snap-start md:w-auto md:shrink">
-            <a href="catalogue.html" class="group block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-slate-900">
-              <div class="relative aspect-[3/4] overflow-hidden bg-stone-100">
-                <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=900&q=80" alt="Veste courte en lin portée" loading="lazy" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105">
-                <span class="absolute left-3 top-3 bg-white px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-slate-900">Nouveau</span>
-              </div>
-              <p class="mt-4 text-xs uppercase tracking-widest text-slate-500">Vestes</p>
-              <h3 class="mt-1 text-base font-semibold text-slate-900">Veste courte en lin</h3>
-              <p class="mt-2 text-sm text-slate-700">189,00 €</p>
-            </a>
-          </li>
-
-          <li class="w-[78%] shrink-0 snap-start md:w-auto md:shrink">
-            <a href="catalogue.html" class="group block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-slate-900">
-              <div class="relative aspect-[3/4] overflow-hidden bg-stone-100">
-                <img src="https://images.unsplash.com/photo-1598033129183-c4f50c736f10?auto=format&fit=crop&w=900&q=80" alt="Chemise claire en popeline" loading="lazy" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105">
-                <span class="absolute left-3 top-3 bg-white px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-slate-900">Nouveau</span>
-              </div>
-              <p class="mt-4 text-xs uppercase tracking-widest text-slate-500">Chemises</p>
-              <h3 class="mt-1 text-base font-semibold text-slate-900">Chemise en popeline</h3>
-              <p class="mt-2 text-sm text-slate-700">95,00 €</p>
-            </a>
-          </li>
-
-          <li class="w-[78%] shrink-0 snap-start md:w-auto md:shrink">
-            <a href="catalogue.html" class="group block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-slate-900">
-              <div class="relative aspect-[3/4] overflow-hidden bg-stone-100">
-                <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=900&q=80" alt="Pantalon droit en coton" loading="lazy" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105">
-                <span class="absolute left-3 top-3 bg-white px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-slate-900">Nouveau</span>
-              </div>
-              <p class="mt-4 text-xs uppercase tracking-widest text-slate-500">Pantalons</p>
-              <h3 class="mt-1 text-base font-semibold text-slate-900">Pantalon droit en coton</h3>
-              <p class="mt-2 text-sm text-slate-700">129,00 €</p>
-            </a>
-          </li>
-
-          <li class="w-[78%] shrink-0 snap-start md:w-auto md:shrink">
-            <a href="catalogue.html" class="group block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-slate-900">
-              <div class="relative aspect-[3/4] overflow-hidden bg-stone-100">
-                <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=900&q=80" alt="Robe fluide portée" loading="lazy" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105">
-                <span class="absolute left-3 top-3 bg-white px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-slate-900">Nouveau</span>
-              </div>
-              <p class="mt-4 text-xs uppercase tracking-widest text-slate-500">Robes</p>
-              <h3 class="mt-1 text-base font-semibold text-slate-900">Robe fluide imprimée</h3>
-              <p class="mt-2 text-sm text-slate-700">165,00 €</p>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <section aria-labelledby="best-sellers-title" class="border-t border-neutral-200 py-14 sm:py-16 lg:py-20">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <h2 id="best-sellers-title" class="mb-8 font-serif text-3xl text-slate-900">
-          Les incontournables
-        </h2>
-
-        <ul tabindex="0" aria-label="Les incontournables" class="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-slate-900 md:grid md:grid-cols-2 md:overflow-visible md:pb-0 lg:grid-cols-4">
-          <li class="w-[78%] shrink-0 snap-start md:w-auto md:shrink">
-            <a href="catalogue.html" class="group block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-slate-900">
-              <div class="relative aspect-[3/4] overflow-hidden bg-stone-100">
-                <img src="https://images.unsplash.com/photo-1543076447-215ad9ba6923?auto=format&fit=crop&w=900&q=80" alt="Trench classique porté" loading="lazy" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105">
-                <span class="absolute left-3 top-3 bg-white px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-slate-900">Best-seller</span>
-              </div>
-              <p class="mt-4 text-xs uppercase tracking-widest text-slate-500">Manteaux</p>
-              <h3 class="mt-1 text-base font-semibold text-slate-900">Trench Héritage</h3>
-              <p class="mt-2 text-sm text-slate-700">249,00 €</p>
-            </a>
-          </li>
-
-          <li class="w-[78%] shrink-0 snap-start md:w-auto md:shrink">
-            <a href="catalogue.html" class="group block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-slate-900">
-              <div class="relative aspect-[3/4] overflow-hidden bg-stone-100">
-                <img src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=900&q=80" alt="Pull doux à col rond" loading="lazy" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105">
-                <span class="absolute left-3 top-3 bg-white px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-slate-900">Best-seller</span>
-              </div>
-              <p class="mt-4 text-xs uppercase tracking-widest text-slate-500">Maille</p>
-              <h3 class="mt-1 text-base font-semibold text-slate-900">Pull col rond mérinos</h3>
-              <p class="mt-2 text-sm text-slate-700">145,00 €</p>
-            </a>
-          </li>
-
-          <li class="w-[78%] shrink-0 snap-start md:w-auto md:shrink">
-            <a href="catalogue.html" class="group block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-slate-900">
-              <div class="relative aspect-[3/4] overflow-hidden bg-stone-100">
-                <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=900&q=80" alt="Jean droit en denim" loading="lazy" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105">
-                <span class="absolute left-3 top-3 bg-white px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-slate-900">Best-seller</span>
-              </div>
-              <p class="mt-4 text-xs uppercase tracking-widest text-slate-500">Denim</p>
-              <h3 class="mt-1 text-base font-semibold text-slate-900">Jean coupe droite</h3>
-              <p class="mt-2 text-sm text-slate-700">120,00 €</p>
-            </a>
-          </li>
-
-          <li class="w-[78%] shrink-0 snap-start md:w-auto md:shrink">
-            <a href="catalogue.html" class="group block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-slate-900">
-              <div class="relative aspect-[3/4] overflow-hidden bg-stone-100">
-                <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=900&q=80" alt="Sac cabas en toile" loading="lazy" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105">
-                <span class="absolute left-3 top-3 bg-white px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-slate-900">Best-seller</span>
-              </div>
-              <p class="mt-4 text-xs uppercase tracking-widest text-slate-500">Accessoires</p>
-              <h3 class="mt-1 text-base font-semibold text-slate-900">Sac cabas Atelier</h3>
-              <p class="mt-2 text-sm text-slate-700">175,00 €</p>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </section>
+    <h1 class="sr-only">Accueil — Maison [Nombre]</h1>
+    <!-- [Home: hero + listados horizontales de productos] -->
   </main>
 
   <!-- ════════════════════════════════════════════════════════════
-       FOOTER (REUTILIZABLE — idéntico a base.html)
+       FOOTER (REUTILIZABLE)
+       Idéntico a docs/reference/base.html
        ──────────────────────────────────────────────────────────── -->
   <footer class="bg-slate-900 text-slate-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div class="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
 
+        <!-- Categorías -->
         <div>
           <h2 class="mb-4 text-xs font-semibold uppercase tracking-widest text-white">Catégories</h2>
           <ul class="space-y-2 text-sm">
@@ -271,6 +137,7 @@
           </ul>
         </div>
 
+        <!-- Legal -->
         <div>
           <h2 class="mb-4 text-xs font-semibold uppercase tracking-widest text-white">Légal</h2>
           <ul class="space-y-2 text-sm">
@@ -280,7 +147,22 @@
           </ul>
         </div>
 
-        <div class="sm:col-span-2">
+        <!-- Contacto (microdatos Organization) -->
+        <div itemscope itemtype="https://schema.org/Organization">
+          <meta itemprop="name" content="Maison">
+          <h2 class="mb-4 text-xs font-semibold uppercase tracking-widest text-white">Contact</h2>
+          <ul class="space-y-2 text-sm">
+            <li itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+              <span itemprop="streetAddress">10 rue du Faubourg Saint-Honoré</span>,
+              <span itemprop="postalCode">75008</span> <span itemprop="addressLocality">Paris</span>
+            </li>
+            <li><a href="mailto:contact@maison-example.fr" itemprop="email" class="transition-colors hover:text-white">contact@maison-example.fr</a></li>
+            <li><a href="tel:+33100000000" itemprop="telephone" class="transition-colors hover:text-white">+33 1 00 00 00 00</a></li>
+          </ul>
+        </div>
+
+        <!-- Newsletter -->
+        <div class="sm:col-span-2 lg:col-span-1">
           <h2 class="mb-4 text-xs font-semibold uppercase tracking-widest text-white">Newsletter</h2>
           <p class="mb-4 text-sm">Recevez nos nouveautés et offres exclusives.</p>
           <form class="flex max-w-md flex-col gap-2 sm:flex-row">
@@ -300,6 +182,7 @@
         </div>
       </div>
 
+      <!-- Pie inferior: copyright + redes sociales (placeholder) -->
       <div class="mt-10 flex flex-col items-center justify-between gap-4 border-t border-slate-700 pt-6 text-xs sm:flex-row">
         <p>© 2026 Maison [Nombre]. Tous droits réservés.</p>
         <ul class="flex gap-6">
@@ -311,14 +194,18 @@
     </div>
   </footer>
 
-  <!-- JS vanilla mínimo: toggle menú móvil -->
+  <!-- ════════════════════════════════════════════════════════════
+       JS VANILLA MÍNIMO (sin dependencias externas)
+       Toggle del menú móvil.
+       ──────────────────────────────────────────────────────────── -->
   <script>
     const toggle = document.getElementById('menu-toggle');
-    const menu   = document.getElementById('mobile-menu');
+    const menu = document.getElementById('mobile-menu');
     if (toggle && menu) {
       toggle.addEventListener('click', () => {
         const expanded = toggle.getAttribute('aria-expanded') === 'true';
         toggle.setAttribute('aria-expanded', String(!expanded));
+        toggle.setAttribute('aria-label', expanded ? 'Abrir menú de navegación' : 'Cerrar menú de navegación');
         menu.hidden = expanded;
       });
     }

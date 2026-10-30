@@ -154,8 +154,22 @@
           </ul>
         </div>
 
-        <!-- Contacto & Newsletter -->
-        <div class="sm:col-span-2">
+        <!-- Contacto (microdatos Organization) -->
+        <div itemscope itemtype="https://schema.org/Organization">
+          <meta itemprop="name" content="Maison">
+          <h2 class="mb-4 text-xs font-semibold uppercase tracking-widest text-white">Contact</h2>
+          <ul class="space-y-2 text-sm">
+            <li itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+              <span itemprop="streetAddress">10 rue du Faubourg Saint-Honoré</span>,
+              <span itemprop="postalCode">75008</span> <span itemprop="addressLocality">Paris</span>
+            </li>
+            <li><a href="mailto:contact@maison-example.fr" itemprop="email" class="transition-colors hover:text-white">contact@maison-example.fr</a></li>
+            <li><a href="tel:+33100000000" itemprop="telephone" class="transition-colors hover:text-white">+33 1 00 00 00 00</a></li>
+          </ul>
+        </div>
+
+        <!-- Newsletter -->
+        <div class="sm:col-span-2 lg:col-span-1">
           <h2 class="mb-4 text-xs font-semibold uppercase tracking-widest text-white">Newsletter</h2>
           <p class="mb-4 text-sm">Recevez nos nouveautés et offres exclusives.</p>
           <form class="flex max-w-md flex-col gap-2 sm:flex-row">
