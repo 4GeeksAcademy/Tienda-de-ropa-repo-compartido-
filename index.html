@@ -111,202 +111,162 @@
   </header>
 
   <!-- ════════════════════════════════════════════════════════════
-       MAIN (CONTENIDO DE LA VISTA HOME)
+        MAIN — VISTA HOME (contenido a implementar en siguiente fase)
        ──────────────────────────────────────────────────────────── -->
   <main id="site-main" class="flex-1">
-
-  <!-- HERO -->
-  <section class="relative min-h-[550px] md:min-h-[650px] flex items-center bg-neutral-100">
-
-    <img
-      src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=2000&q=85"
-      alt="Collection de mode française de saison"
-      class="absolute inset-0 w-full h-full object-cover"
+    <section
+      aria-labelledby="home-title"
+      class="relative isolate min-h-[480px] overflow-hidden bg-slate-900 sm:min-h-[520px] lg:min-h-[600px]"
     >
+      <img
+        src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=2400&q=85"
+        alt="Silhouette portant une tenue de mode contemporaine"
+        fetchpriority="high"
+        class="absolute inset-0 h-full w-full object-cover object-[center_38%]"
+      >
 
-    <div class="absolute inset-0 bg-black/25"></div>
+      <div aria-hidden="true" class="absolute inset-0 bg-slate-950/40"></div>
 
-    <div class="relative z-10 max-w-7xl mx-auto w-full px-6 lg:px-8">
-      <div class="max-w-xl text-white">
+      <div class="relative mx-auto flex min-h-[480px] max-w-7xl items-end px-4 pb-12 sm:min-h-[520px] sm:px-6 sm:pb-16 lg:min-h-[600px] lg:px-8 lg:pb-20">
+        <div class="max-w-2xl text-white">
+          <p class="text-xs font-semibold uppercase tracking-widest sm:text-sm">
+            Collection printemps-été
+          </p>
 
-        <p class="text-xs uppercase tracking-[0.3em] mb-5">
-          Collection Automne / Hiver
-        </p>
+          <h1 id="home-title" class="mt-4 max-w-xl font-serif text-4xl font-medium leading-tight sm:text-5xl lg:text-6xl">
+            La nouvelle saison, en mouvement
+          </h1>
 
-        <h1 class="font-serif text-4xl md:text-6xl leading-tight mb-6">
-          La nouvelle saison, en mouvement
-        </h1>
+          <p class="mt-4 max-w-lg text-base leading-relaxed sm:text-lg">
+            Des silhouettes contemporaines et des pièces essentielles pour accompagner chaque jour.
+          </p>
 
-        <p class="text-base md:text-lg mb-8 max-w-md">
-          Découvrez une collection pensée pour accompagner
-          chaque moment avec élégance.
-        </p>
-
-        <a
-          href="catalogue.html"
-          class="inline-block bg-white text-slate-900 px-8 py-4 text-xs uppercase tracking-widest font-semibold hover:bg-slate-200 transition-colors"
-        >
-          Découvrir la collection
-        </a>
-
+          <a
+            href="catalogue.html"
+            class="mt-7 inline-flex min-h-12 items-center justify-center bg-white px-6 py-3 text-xs font-semibold uppercase tracking-widest text-slate-900 transition-colors hover:bg-neutral-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+          >
+            Découvrir le catalogue
+          </a>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-
-  <!-- NOUVEAUTÉS -->
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-
-    <div class="flex justify-between items-end mb-10">
-      <div>
-        <p class="text-xs uppercase tracking-widest text-gray-500 mb-3">
-          À découvrir
-        </p>
-        <h2 class="font-serif text-3xl md:text-4xl">
+    <section aria-labelledby="new-arrivals-title" class="py-14 sm:py-16 lg:py-20">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <h2 id="new-arrivals-title" class="mb-8 font-serif text-3xl text-slate-900">
           Nouveautés
         </h2>
+
+        <ul tabindex="0" aria-label="Nouveautés" class="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-slate-900 md:grid md:grid-cols-2 md:overflow-visible md:pb-0 lg:grid-cols-4">
+          <li class="w-[78%] shrink-0 snap-start md:w-auto md:shrink">
+            <a href="catalogue.html" class="group block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-slate-900">
+              <div class="relative aspect-[3/4] overflow-hidden bg-stone-100">
+                <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=900&q=80" alt="Veste courte en lin portée" loading="lazy" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105">
+                <span class="absolute left-3 top-3 bg-white px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-slate-900">Nouveau</span>
+              </div>
+              <p class="mt-4 text-xs uppercase tracking-widest text-slate-500">Vestes</p>
+              <h3 class="mt-1 text-base font-semibold text-slate-900">Veste courte en lin</h3>
+              <p class="mt-2 text-sm text-slate-700">189,00 €</p>
+            </a>
+          </li>
+
+          <li class="w-[78%] shrink-0 snap-start md:w-auto md:shrink">
+            <a href="catalogue.html" class="group block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-slate-900">
+              <div class="relative aspect-[3/4] overflow-hidden bg-stone-100">
+                <img src="https://images.unsplash.com/photo-1598033129183-c4f50c736f10?auto=format&fit=crop&w=900&q=80" alt="Chemise claire en popeline" loading="lazy" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105">
+                <span class="absolute left-3 top-3 bg-white px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-slate-900">Nouveau</span>
+              </div>
+              <p class="mt-4 text-xs uppercase tracking-widest text-slate-500">Chemises</p>
+              <h3 class="mt-1 text-base font-semibold text-slate-900">Chemise en popeline</h3>
+              <p class="mt-2 text-sm text-slate-700">95,00 €</p>
+            </a>
+          </li>
+
+          <li class="w-[78%] shrink-0 snap-start md:w-auto md:shrink">
+            <a href="catalogue.html" class="group block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-slate-900">
+              <div class="relative aspect-[3/4] overflow-hidden bg-stone-100">
+                <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=900&q=80" alt="Pantalon droit en coton" loading="lazy" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105">
+                <span class="absolute left-3 top-3 bg-white px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-slate-900">Nouveau</span>
+              </div>
+              <p class="mt-4 text-xs uppercase tracking-widest text-slate-500">Pantalons</p>
+              <h3 class="mt-1 text-base font-semibold text-slate-900">Pantalon droit en coton</h3>
+              <p class="mt-2 text-sm text-slate-700">129,00 €</p>
+            </a>
+          </li>
+
+          <li class="w-[78%] shrink-0 snap-start md:w-auto md:shrink">
+            <a href="catalogue.html" class="group block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-slate-900">
+              <div class="relative aspect-[3/4] overflow-hidden bg-stone-100">
+                <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=900&q=80" alt="Robe fluide portée" loading="lazy" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105">
+                <span class="absolute left-3 top-3 bg-white px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-slate-900">Nouveau</span>
+              </div>
+              <p class="mt-4 text-xs uppercase tracking-widest text-slate-500">Robes</p>
+              <h3 class="mt-1 text-base font-semibold text-slate-900">Robe fluide imprimée</h3>
+              <p class="mt-2 text-sm text-slate-700">165,00 €</p>
+            </a>
+          </li>
+        </ul>
       </div>
+    </section>
 
-      <a
-        href="catalogue.html"
-        class="text-xs uppercase tracking-widest border-b border-slate-900 pb-1 hover:text-gray-500"
-      >
-        Tout découvrir
-      </a>
-    </div>
+    <section aria-labelledby="best-sellers-title" class="border-t border-neutral-200 py-14 sm:py-16 lg:py-20">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <h2 id="best-sellers-title" class="mb-8 font-serif text-3xl text-slate-900">
+          Les incontournables
+        </h2>
 
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+        <ul tabindex="0" aria-label="Les incontournables" class="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-slate-900 md:grid md:grid-cols-2 md:overflow-visible md:pb-0 lg:grid-cols-4">
+          <li class="w-[78%] shrink-0 snap-start md:w-auto md:shrink">
+            <a href="catalogue.html" class="group block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-slate-900">
+              <div class="relative aspect-[3/4] overflow-hidden bg-stone-100">
+                <img src="https://images.unsplash.com/photo-1543076447-215ad9ba6923?auto=format&fit=crop&w=900&q=80" alt="Trench classique porté" loading="lazy" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105">
+                <span class="absolute left-3 top-3 bg-white px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-slate-900">Best-seller</span>
+              </div>
+              <p class="mt-4 text-xs uppercase tracking-widest text-slate-500">Manteaux</p>
+              <h3 class="mt-1 text-base font-semibold text-slate-900">Trench Héritage</h3>
+              <p class="mt-2 text-sm text-slate-700">249,00 €</p>
+            </a>
+          </li>
 
-      <a href="catalogue.html" class="group">
-        <div class="aspect-[3/4] overflow-hidden bg-gray-100 mb-4">
-          <img
-            src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=700&q=80"
-            alt="Tenue féminine de la nouvelle collection"
-            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-          >
-        </div>
-        <h3 class="text-sm font-medium">Veste élégante</h3>
-        <p class="text-sm text-gray-500 mt-1">129,00 €</p>
-      </a>
+          <li class="w-[78%] shrink-0 snap-start md:w-auto md:shrink">
+            <a href="catalogue.html" class="group block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-slate-900">
+              <div class="relative aspect-[3/4] overflow-hidden bg-stone-100">
+                <img src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=900&q=80" alt="Pull doux à col rond" loading="lazy" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105">
+                <span class="absolute left-3 top-3 bg-white px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-slate-900">Best-seller</span>
+              </div>
+              <p class="mt-4 text-xs uppercase tracking-widest text-slate-500">Maille</p>
+              <h3 class="mt-1 text-base font-semibold text-slate-900">Pull col rond mérinos</h3>
+              <p class="mt-2 text-sm text-slate-700">145,00 €</p>
+            </a>
+          </li>
 
-      <a href="catalogue.html" class="group">
-        <div class="aspect-[3/4] overflow-hidden bg-gray-100 mb-4">
-          <img
-            src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=700&q=80"
-            alt="Look contemporain de la collection"
-            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-          >
-        </div>
-        <h3 class="text-sm font-medium">Ensemble moderne</h3>
-        <p class="text-sm text-gray-500 mt-1">159,00 €</p>
-      </a>
+          <li class="w-[78%] shrink-0 snap-start md:w-auto md:shrink">
+            <a href="catalogue.html" class="group block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-slate-900">
+              <div class="relative aspect-[3/4] overflow-hidden bg-stone-100">
+                <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=900&q=80" alt="Jean droit en denim" loading="lazy" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105">
+                <span class="absolute left-3 top-3 bg-white px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-slate-900">Best-seller</span>
+              </div>
+              <p class="mt-4 text-xs uppercase tracking-widest text-slate-500">Denim</p>
+              <h3 class="mt-1 text-base font-semibold text-slate-900">Jean coupe droite</h3>
+              <p class="mt-2 text-sm text-slate-700">120,00 €</p>
+            </a>
+          </li>
 
-      <a href="catalogue.html" class="group">
-        <div class="aspect-[3/4] overflow-hidden bg-gray-100 mb-4">
-          <img
-            src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=700&q=80"
-            alt="Silhouette de mode féminine"
-            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-          >
-        </div>
-        <h3 class="text-sm font-medium">Robe de saison</h3>
-        <p class="text-sm text-gray-500 mt-1">119,00 €</p>
-      </a>
-
-      <a href="catalogue.html" class="group">
-        <div class="aspect-[3/4] overflow-hidden bg-gray-100 mb-4">
-          <img
-            src="https://images.unsplash.com/photo-1548624149-f3213f6b6f42?auto=format&fit=crop&w=700&q=80"
-            alt="Pièce de mode de la nouvelle collection"
-            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-          >
-        </div>
-        <h3 class="text-sm font-medium">Pièce intemporelle</h3>
-        <p class="text-sm text-gray-500 mt-1">89,00 €</p>
-      </a>
-
-    </div>
-  </section>
-
-
-  <!-- LES INCONTOURNABLES -->
-  <section class="bg-neutral-50 py-16 md:py-24">
-
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-      <div class="flex justify-between items-end mb-10">
-        <div>
-          <p class="text-xs uppercase tracking-widest text-gray-500 mb-3">
-            Nos favoris
-          </p>
-          <h2 class="font-serif text-3xl md:text-4xl">
-            Les incontournables
-          </h2>
-        </div>
-
-        <a
-          href="catalogue.html"
-          class="text-xs uppercase tracking-widest border-b border-slate-900 pb-1 hover:text-gray-500"
-        >
-          Voir tout
-        </a>
+          <li class="w-[78%] shrink-0 snap-start md:w-auto md:shrink">
+            <a href="catalogue.html" class="group block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-slate-900">
+              <div class="relative aspect-[3/4] overflow-hidden bg-stone-100">
+                <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=900&q=80" alt="Sac cabas en toile" loading="lazy" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105">
+                <span class="absolute left-3 top-3 bg-white px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-slate-900">Best-seller</span>
+              </div>
+              <p class="mt-4 text-xs uppercase tracking-widest text-slate-500">Accessoires</p>
+              <h3 class="mt-1 text-base font-semibold text-slate-900">Sac cabas Atelier</h3>
+              <p class="mt-2 text-sm text-slate-700">175,00 €</p>
+            </a>
+          </li>
+        </ul>
       </div>
-
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-
-        <a href="catalogue.html" class="group">
-          <div class="aspect-[3/4] overflow-hidden bg-gray-100 mb-4">
-            <img
-              src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=700&q=80"
-              alt="Veste classique intemporelle"
-              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-            >
-          </div>
-          <h3 class="text-sm font-medium">Veste classique</h3>
-          <p class="text-sm text-gray-500 mt-1">145,00 €</p>
-        </a>
-
-        <a href="catalogue.html" class="group">
-          <div class="aspect-[3/4] overflow-hidden bg-gray-100 mb-4">
-            <img
-              src="https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=700&q=80"
-              alt="Chemise élégante"
-              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-            >
-          </div>
-          <h3 class="text-sm font-medium">Chemise essentielle</h3>
-          <p class="text-sm text-gray-500 mt-1">79,00 €</p>
-        </a>
-
-        <a href="catalogue.html" class="group">
-          <div class="aspect-[3/4] overflow-hidden bg-gray-100 mb-4">
-            <img
-              src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=700&q=80"
-              alt="Pantalon de coupe classique"
-              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-            >
-          </div>
-          <h3 class="text-sm font-medium">Pantalon signature</h3>
-          <p class="text-sm text-gray-500 mt-1">99,00 €</p>
-        </a>
-
-        <a href="catalogue.html" class="group">
-          <div class="aspect-[3/4] overflow-hidden bg-gray-100 mb-4">
-            <img
-              src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=700&q=80"
-              alt="Sac élégant de la collection"
-              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-            >
-          </div>
-          <h3 class="text-sm font-medium">Sac intemporel</h3>
-          <p class="text-sm text-gray-500 mt-1">110,00 €</p>
-        </a>
-
-      </div>
-    </div>
-  </section>
-
-</main>
+    </section>
+  </main>
 
   <!-- ════════════════════════════════════════════════════════════
        FOOTER (REUTILIZABLE)
