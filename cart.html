@@ -97,11 +97,88 @@
   </header>
 
   <!-- ════════════════════════════════════════════════════════════
-       MAIN — VISTA CARRITO (contenido a implementar en siguiente fase)
+       MAIN — VISTA CARRITO
        ──────────────────────────────────────────────────────────── -->
   <main id="site-main" class="flex-1">
-    <h1 class="sr-only">Panier — Maison [Nombre]</h1>
-    <!-- [Carrito: tabla 3 items + resumen de compra] -->
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
+
+      <!-- ── Título ──────────────────────────────────────── -->
+      <h1 class="font-serif text-3xl lg:text-4xl font-semibold tracking-wide text-slate-900">Votre Panier</h1>
+      <p id="cart-count-label" class="mt-2 text-sm text-gray-500">
+        <span id="cart-count-text">0</span> article(s)
+      </p>
+
+      <!-- ── Estado vacío ───────────────────────────────── -->
+      <div id="cart-empty" class="mt-10 text-center py-16 border border-dashed border-neutral-300">
+        <p class="text-lg text-slate-600">Votre panier est vide</p>
+        <p class="mt-2 text-sm text-gray-500">Découvrez notre collection et ajoutez vos coups de cœur.</p>
+        <a href="catalogue.html" class="mt-6 inline-block bg-slate-900 text-white px-6 py-3 rounded-none hover:bg-slate-800 transition-colors duration-200 uppercase text-xs font-semibold tracking-widest">
+          Découvrir le catalogue
+        </a>
+      </div>
+
+      <!-- ── Contenido del carrito ──────────────────────── -->
+      <div id="cart-content" class="mt-8 lg:mt-10 hidden">
+
+        <div class="lg:grid lg:grid-cols-[1fr_360px] lg:gap-10 xl:gap-14">
+
+          <!-- ── Tabla de productos ──────────────────────── -->
+          <div>
+            <div class="hidden md:grid md:grid-cols-[80px_1fr_100px_100px_100px_40px] gap-4 pb-3 border-b border-neutral-200 text-xs font-semibold uppercase tracking-widest text-gray-500">
+              <span class="sr-only">Image</span>
+              <span>Produit</span>
+              <span class="text-center">Prix</span>
+              <span class="text-center">Qté</span>
+              <span class="text-right">Sous-total</span>
+              <span class="sr-only">Supprimer</span>
+            </div>
+            <div id="cart-items" class="divide-y divide-neutral-200">
+              <!-- Los items se renderizan dinámicamente con JS -->
+            </div>
+          </div>
+
+          <!-- ── Resumen de compra ───────────────────────── -->
+          <aside class="mt-10 lg:mt-0">
+            <div class="bg-stone-50 border border-neutral-200 p-6 lg:p-8">
+              <h2 class="text-xs font-semibold uppercase tracking-widest text-slate-900 mb-6">Résumé de la commande</h2>
+
+              <div class="space-y-3 text-sm">
+                <div class="flex justify-between">
+                  <span class="text-slate-600">Sous-total</span>
+                  <span id="cart-subtotal" class="font-medium text-slate-900">0,00 €</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-slate-600">TVA (20 %)</span>
+                  <span id="cart-tva" class="font-medium text-slate-900">0,00 €</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-slate-600">Livraison</span>
+                  <span class="font-medium text-green-700">Offerte</span>
+                </div>
+              </div>
+
+              <div class="mt-6 pt-6 border-t border-neutral-200">
+                <div class="flex justify-between text-base font-semibold text-slate-900">
+                  <span>Total</span>
+                  <span id="cart-total">0,00 €</span>
+                </div>
+              </div>
+
+              <a href="checkout.html" class="mt-6 block w-full bg-slate-900 text-white px-6 py-3 rounded-none hover:bg-slate-800 transition-colors duration-200 text-center uppercase text-xs font-semibold tracking-widest">
+                Procéder au paiement
+              </a>
+
+              <a href="catalogue.html" class="mt-4 block w-full border border-slate-900 text-slate-900 px-6 py-3 rounded-none hover:bg-slate-900 hover:text-white transition-colors duration-200 text-center uppercase text-xs font-semibold tracking-widest">
+                Continuer mes achats
+              </a>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+
+    </div>
   </main>
 
   <!-- ════════════════════════════════════════════════════════════
@@ -161,8 +238,9 @@
     </div>
   </footer>
 
-  <!-- JS vanilla mínimo: toggle menú móvil -->
+  <!-- JS vanilla mínimo: toggle menú móvil + lógica de carrito -->
   <script>
+    // ── Menú móvil ───────────────────────────────────────
     const toggle = document.getElementById('menu-toggle');
     const menu   = document.getElementById('mobile-menu');
     if (toggle && menu) {
@@ -172,6 +250,149 @@
         menu.hidden = expanded;
       });
     }
+
+    // ── Formato de precio EUR ────────────────────────────
+    const formatEUR = (value) =>
+      new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(value);
+
+    // ── Indica si hay datos de carrito guardados ─────────
+    // Si localStorage está vacío, se cargan 3 productos de ejemplo
+    // para poder demostrar el flujo completo del prototipo.
+    function getCart() {
+      const stored = localStorage.getItem('maison_cart');
+      if (stored) {
+        return JSON.parse(stored);
+      }
+      return [
+        {
+          id: 'MS-CHE-001', name: 'Chemise Blanche Classique', price: 98,
+          size: 'M', quantity: 1,
+          image: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=200&q=80'
+        },
+        {
+          id: 'MS-PAN-002', name: 'Pantalon Tailleur Noir', price: 145,
+          size: 'L', quantity: 1,
+          image: 'https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=200&q=80'
+        },
+        {
+          id: 'MS-ACC-003', name: 'Foulard Soie Écru', price: 65,
+          size: 'Unique', quantity: 2,
+          image: 'https://images.unsplash.com/photo-1601924994987-69e26d50dc26?w=200&q=80'
+        }
+      ];
+    }
+
+    let cart = getCart();
+
+    // Guarda el carrito en localStorage
+    function saveCart() {
+      localStorage.setItem('maison_cart', JSON.stringify(cart));
+    }
+
+    // Renderiza todas las filas del carrito
+    function renderCart() {
+      const container = document.getElementById('cart-items');
+      const emptyEl   = document.getElementById('cart-empty');
+      const contentEl = document.getElementById('cart-content');
+
+      if (cart.length === 0) {
+        emptyEl.classList.remove('hidden');
+        contentEl.classList.add('hidden');
+      } else {
+        emptyEl.classList.add('hidden');
+        contentEl.classList.remove('hidden');
+      }
+
+      const countText = document.getElementById('cart-count-text');
+      const totalQty = cart.reduce((sum, item) => sum + item.quantity, 0);
+      countText.textContent = totalQty;
+
+      container.innerHTML = cart.map((item, index) => `
+        <div class="grid grid-cols-[72px_1fr] md:grid-cols-[80px_1fr_100px_100px_100px_40px] gap-4 items-center py-5">
+          <!-- Imagen -->
+          <img src="${item.image}" alt="${item.name}" class="aspect-[3/4] object-cover w-16 md:w-20">
+          <!-- Nombre + talla -->
+          <div>
+            <a href="product.html" class="font-medium text-slate-900 hover:text-slate-600 transition-colors">${item.name}</a>
+            <p class="mt-1 text-xs text-gray-500">Taille : ${item.size}</p>
+            <button type="button" onclick="removeItem(${index})" class="mt-2 text-xs text-slate-500 underline hover:text-red-600 transition-colors md:hidden">
+              Supprimer
+            </button>
+          </div>
+          <!-- Precio unitario (oculto en móvil para simplificar) -->
+          <span class="hidden md:block text-center text-sm text-slate-600">${formatEUR(item.price)}</span>
+          <!-- Cantidad -->
+          <div class="flex items-center justify-start md:justify-center gap-0 border border-slate-300 w-fit md:w-auto md:mx-auto">
+            <button type="button" class="px-2 md:px-3 py-1 text-sm hover:bg-slate-100 transition-colors" onclick="changeQty(${index}, -1)" aria-label="Diminuer la quantité de ${item.name}">−</button>
+            <input type="number" value="${item.quantity}" min="1" max="99" readonly
+              class="w-10 md:w-12 border-x border-slate-300 py-1 text-center text-sm outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+              aria-label="Quantité de ${item.name}">
+            <button type="button" class="px-2 md:px-3 py-1 text-sm hover:bg-slate-100 transition-colors" onclick="changeQty(${index}, 1)" aria-label="Augmenter la quantité de ${item.name}">+</button>
+          </div>
+          <!-- Subtotal de línea -->
+          <span class="text-right text-sm font-medium text-slate-900">${formatEUR(item.price * item.quantity)}</span>
+          <!-- Eliminar (desktop) -->
+          <button type="button" onclick="removeItem(${index})" class="hidden md:block text-gray-400 hover:text-red-600 transition-colors" aria-label="Supprimer ${item.name}">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+            </svg>
+          </button>
+        </div>
+      `).join('');
+
+      updateSummary();
+    }
+
+    // Cambia la cantidad de un item
+    function changeQty(index, delta) {
+      const newVal = cart[index].quantity + delta;
+      cart[index].quantity = Math.max(1, Math.min(99, newVal));
+      saveCart();
+      renderCart();
+      updateCartBadge();
+    }
+
+    // Elimina un item
+    function removeItem(index) {
+      cart.splice(index, 1);
+      saveCart();
+      renderCart();
+      updateCartBadge();
+    }
+
+    // Actualiza el resumen (subtotal, TVA 20 %, total)
+    function updateSummary() {
+      const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+      const tva = subtotal * 0.20;
+      const total = subtotal + tva;
+
+      document.getElementById('cart-subtotal').textContent = formatEUR(subtotal);
+      document.getElementById('cart-tva').textContent = formatEUR(tva);
+      document.getElementById('cart-total').textContent = formatEUR(total);
+    }
+
+    // Badge en el icono del navbar
+    function updateCartBadge() {
+      const total = cart.reduce((sum, item) => sum + item.quantity, 0);
+      document.querySelectorAll('[aria-label="Carrito de compra"]').forEach(link => {
+        let badge = link.querySelector('.cart-badge');
+        if (total > 0) {
+          if (!badge) {
+            badge = document.createElement('span');
+            badge.className = 'cart-badge absolute -top-2 -right-2 bg-slate-900 text-white text-[10px] font-bold w-5 h-5 flex items-center justify-center';
+            link.style.position = 'relative';
+            link.appendChild(badge);
+          }
+          badge.textContent = total > 99 ? '99+' : total;
+        } else {
+          if (badge) badge.remove();
+        }
+      });
+    }
+
+    // Render inicial
+    renderCart();
+    updateCartBadge();
   </script>
 </body>
 </html>
