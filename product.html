@@ -97,11 +97,148 @@
   </header>
 
   <!-- ════════════════════════════════════════════════════════════
-       MAIN — VISTA PRODUCTO (contenido a implementar en siguiente fase)
+       MAIN — VISTA PRODUCTO
        ──────────────────────────────────────────────────────────── -->
   <main id="site-main" class="flex-1">
-    <h1 class="sr-only">Produit — Maison [Nombre]</h1>
-    <!-- [Producto: 2 columnas desktop + sección inferior de materiales] -->
+
+    <!-- ── Breadcrumb ────────────────────────────────────── -->
+    <nav aria-label="Breadcrumb" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-2">
+      <ol class="flex items-center gap-2 text-xs text-gray-500">
+        <li><a href="index.html" class="hover:text-slate-900 transition-colors">Accueil</a></li>
+        <li aria-hidden="true">/</li>
+        <li><a href="catalogue.html" class="hover:text-slate-900 transition-colors">Catalogue</a></li>
+        <li aria-hidden="true">/</li>
+        <li class="text-slate-900 font-semibold" aria-current="page">Chemise Blanche Classique</li>
+      </ol>
+    </nav>
+
+    <!-- ── Producto: 2 columnas ──────────────────────────── -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-10">
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14">
+
+        <!-- Columna Izquierda — Imagen -->
+        <div>
+          <img
+            src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=800&q=80"
+            alt="Chemise Blanche Classique — chemise blanche élégante en coton biologique"
+            class="w-full aspect-[3/4] object-cover"
+            loading="eager"
+          >
+        </div>
+
+        <!-- Columna Derecha — Detalles -->
+        <div class="flex flex-col gap-6">
+
+          <!-- Nombre y SKU -->
+          <div>
+            <h1 class="font-serif text-3xl lg:text-4xl font-semibold tracking-wide text-slate-900">
+              Chemise Blanche Classique
+            </h1>
+            <p class="mt-1 text-sm text-gray-500">SKU · MS-CHE-001</p>
+          </div>
+
+          <!-- Precio -->
+          <p class="text-2xl font-semibold text-slate-900">98,00 €</p>
+
+          <!-- Selector de talla -->
+          <fieldset>
+            <legend class="mb-3 text-xs font-semibold uppercase tracking-widest text-slate-900">Taille</legend>
+            <div class="flex flex-wrap gap-2" role="radiogroup" aria-label="Sélectionnez une taille">
+              <label class="flex cursor-pointer items-center justify-center border border-slate-300 px-5 py-2 text-sm font-medium text-slate-700 transition-all hover:border-slate-900 has-[:checked]:bg-slate-900 has-[:checked]:text-white has-[:checked]:border-slate-900">
+                <input type="radio" name="size" value="XS" class="sr-only" onchange="document.getElementById('selected-size').textContent='XS'">
+                XS
+              </label>
+              <label class="flex cursor-pointer items-center justify-center border border-slate-300 px-5 py-2 text-sm font-medium text-slate-700 transition-all hover:border-slate-900 has-[:checked]:bg-slate-900 has-[:checked]:text-white has-[:checked]:border-slate-900">
+                <input type="radio" name="size" value="S" class="sr-only" checked onchange="document.getElementById('selected-size').textContent='S'">
+                S
+              </label>
+              <label class="flex cursor-pointer items-center justify-center border border-slate-300 px-5 py-2 text-sm font-medium text-slate-700 transition-all hover:border-slate-900 has-[:checked]:bg-slate-900 has-[:checked]:text-white has-[:checked]:border-slate-900">
+                <input type="radio" name="size" value="M" class="sr-only" onchange="document.getElementById('selected-size').textContent='M'">
+                M
+              </label>
+              <label class="flex cursor-pointer items-center justify-center border border-slate-300 px-5 py-2 text-sm font-medium text-slate-700 transition-all hover:border-slate-900 has-[:checked]:bg-slate-900 has-[:checked]:text-white has-[:checked]:border-slate-900">
+                <input type="radio" name="size" value="L" class="sr-only" onchange="document.getElementById('selected-size').textContent='L'">
+                L
+              </label>
+              <label class="flex cursor-pointer items-center justify-center border border-slate-300 px-5 py-2 text-sm font-medium text-slate-700 transition-all hover:border-slate-900 has-[:checked]:bg-slate-900 has-[:checked]:text-white has-[:checked]:border-slate-900">
+                <input type="radio" name="size" value="XL" class="sr-only" onchange="document.getElementById('selected-size').textContent='XL'">
+                XL
+              </label>
+            </div>
+          </fieldset>
+
+          <!-- Selector de cantidad -->
+          <div>
+            <label for="product-qty" class="mb-3 block text-xs font-semibold uppercase tracking-widest text-slate-900">Quantité</label>
+            <div class="flex items-center gap-0 border border-slate-300 w-fit">
+              <button type="button" class="px-4 py-2 text-sm hover:bg-slate-100 transition-colors" onclick="changeQty(-1)" aria-label="Diminuer la quantité">−</button>
+              <input
+                id="product-qty"
+                type="number"
+                value="1"
+                min="1"
+                max="99"
+                class="w-14 border-x border-slate-300 py-2 text-center text-sm outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+                readonly
+              >
+              <button type="button" class="px-4 py-2 text-sm hover:bg-slate-100 transition-colors" onclick="changeQty(1)" aria-label="Augmenter la quantité">+</button>
+            </div>
+          </div>
+
+          <!-- Botón Añadir al carrito -->
+          <button
+            type="button"
+            onclick="ajouterAuPanier()"
+            class="w-full bg-slate-900 text-white px-6 py-3 rounded-none hover:bg-slate-800 transition-colors duration-200 uppercase text-xs font-semibold tracking-widest"
+          >
+            Ajouter au panier
+          </button>
+
+          <!-- Enlace secundario -->
+          <a href="catalogue.html" class="text-center text-xs font-semibold uppercase tracking-widest text-slate-500 hover:text-slate-900 transition-colors">
+            ← Retour au catalogue
+          </a>
+
+        </div>
+      </div>
+
+      <!-- ── Sección inferior: Materiales y Styling ──────── -->
+      <section class="mt-16 lg:mt-24 border-t border-neutral-200 pt-10 lg:pt-14">
+        <div class="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
+
+          <article>
+            <h2 class="text-xs font-semibold uppercase tracking-widest text-slate-900 mb-3">Composition</h2>
+            <ul class="space-y-1 text-sm text-slate-600">
+              <li>100 % Coton biologique certifié GOTS</li>
+              <li>Col italienne — boutons en nacre</li>
+              <li>Fabriqué en France</li>
+            </ul>
+          </article>
+
+          <article>
+            <h2 class="text-xs font-semibold uppercase tracking-widest text-slate-900 mb-3">Entretien</h2>
+            <ul class="space-y-1 text-sm text-slate-600">
+              <li>Lavage à 30°C — programme délicat</li>
+              <li>Repassage à moyenne température</li>
+              <li>Ne pas passer au sèche-linge</li>
+            </ul>
+          </article>
+
+          <article>
+            <h2 class="text-xs font-semibold uppercase tracking-widest text-slate-900 mb-3">Style &amp; Conseils</h2>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Pièce intemporelle du vestiaire français. Portez-la avec un pantalon tailleur pour un look professionnel ou avec un jean brut pour une allure décontractée chic.
+            </p>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- Talla seleccionada (oculta, usada por JS) -->
+      <span id="selected-size" class="hidden">S</span>
+
+    </div>
   </main>
 
   <!-- ════════════════════════════════════════════════════════════
@@ -161,8 +298,9 @@
     </div>
   </footer>
 
-  <!-- JS vanilla mínimo: toggle menú móvil -->
+  <!-- JS vanilla mínimo: toggle menú móvil + carrito -->
   <script>
+    // ── Menú móvil ───────────────────────────────────────
     const toggle = document.getElementById('menu-toggle');
     const menu   = document.getElementById('mobile-menu');
     if (toggle && menu) {
@@ -171,6 +309,81 @@
         toggle.setAttribute('aria-expanded', String(!expanded));
         menu.hidden = expanded;
       });
+    }
+
+    // ── Contador de cantidad ─────────────────────────────
+    function changeQty(delta) {
+      const input = document.getElementById('product-qty');
+      let val = parseInt(input.value, 10) || 1;
+      val = Math.max(1, Math.min(99, val + delta));
+      input.value = val;
+    }
+
+    // ── Indicador de items en el carrito ────────────────
+    function updateCartBadge() {
+      const cart = JSON.parse(localStorage.getItem('maison_cart')) || [];
+      const total = cart.reduce((sum, item) => sum + item.quantity, 0);
+      document.querySelectorAll('[aria-label="Carrito de compra"]').forEach(link => {
+        let badge = link.querySelector('.cart-badge');
+        if (total > 0) {
+          if (!badge) {
+            badge = document.createElement('span');
+            badge.className = 'cart-badge absolute -top-2 -right-2 bg-slate-900 text-white text-[10px] font-bold w-5 h-5 flex items-center justify-center';
+            link.style.position = 'relative';
+            link.appendChild(badge);
+          }
+          badge.textContent = total > 99 ? '99+' : total;
+        } else {
+          if (badge) badge.remove();
+        }
+      });
+    }
+    updateCartBadge();
+
+    // ── Ajouter au panier ───────────────────────────────
+    function ajouterAuPanier() {
+      const taille = document.getElementById('selected-size').textContent;
+      if (!taille) {
+        alert('Veuillez sélectionner une taille.');
+        return;
+      }
+
+      const qtyInput = document.getElementById('product-qty');
+      const quantity = parseInt(qtyInput.value, 10) || 1;
+
+      const product = {
+        id: 'MS-CHE-001',
+        name: 'Chemise Blanche Classique',
+        price: 98.00,
+        size: taille,
+        quantity: quantity,
+        image: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=200&q=80'
+      };
+
+      let cart = JSON.parse(localStorage.getItem('maison_cart')) || [];
+
+      // Si mismo producto y misma talla, suma cantidad
+      const existing = cart.findIndex(item => item.id === product.id && item.size === product.size);
+      if (existing !== -1) {
+        cart[existing].quantity += product.quantity;
+      } else {
+        cart.push(product);
+      }
+
+      localStorage.setItem('maison_cart', JSON.stringify(cart));
+      updateCartBadge();
+
+      // Feedback visual
+      const btn = document.querySelector('button[onclick*="ajouterAuPanier"]');
+      const originalText = btn.textContent;
+      btn.textContent = '✓ Ajouté !';
+      btn.classList.remove('bg-slate-900');
+      btn.classList.add('bg-green-700');
+      setTimeout(() => {
+        btn.textContent = originalText;
+        btn.classList.remove('bg-green-700');
+        btn.classList.add('bg-slate-900');
+      }, 1500);
     }
   </script>
 </body>
