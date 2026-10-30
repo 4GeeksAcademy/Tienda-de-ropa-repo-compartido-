@@ -97,11 +97,336 @@
   </header>
 
   <!-- ════════════════════════════════════════════════════════════
-       MAIN — VISTA CHECKOUT (contenido a implementar en siguiente fase)
+       MAIN — VISTA CHECKOUT
+       Commande en 3 étapes (Contact → Livraison → Facturation+Paiement)
+       + résumé de commande en colonne latérale.
        ──────────────────────────────────────────────────────────── -->
   <main id="site-main" class="flex-1">
     <h1 class="sr-only">Paiement — Maison [Nombre]</h1>
-    <!-- [Checkout: flujo en 3 pasos] -->
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16">
+
+      <!-- ── Encabezado + Stepper (estados de avance) ── -->
+      <header class="mb-12 max-w-2xl">
+        <p class="text-xs font-semibold uppercase tracking-widest text-gray-500">Commande sécurisée · 3 étapes</p>
+        <h2 class="mt-2 font-serif text-3xl sm:text-4xl tracking-wide">Paiement</h2>
+
+        <ol id="checkout-steps" class="mt-8 flex items-center" aria-label="Avancement de la commande">
+          <li class="flex items-center gap-2" data-step-indicator="1">
+            <span class="step-num flex h-8 w-8 items-center justify-center rounded-full border border-neutral-200 text-xs font-semibold text-gray-400">1</span>
+            <span class="hidden text-xs font-semibold uppercase tracking-widest text-gray-400 sm:block">Contact</span>
+          </li>
+          <li class="mx-3 h-px flex-1 bg-neutral-200 sm:mx-4" data-step-line="1" aria-hidden="true"></li>
+          <li class="flex items-center gap-2" data-step-indicator="2">
+            <span class="step-num flex h-8 w-8 items-center justify-center rounded-full border border-neutral-200 text-xs font-semibold text-gray-400">2</span>
+            <span class="hidden text-xs font-semibold uppercase tracking-widest text-gray-400 sm:block">Livraison</span>
+          </li>
+          <li class="mx-3 h-px flex-1 bg-neutral-200 sm:mx-4" data-step-line="2" aria-hidden="true"></li>
+          <li class="flex items-center gap-2" data-step-indicator="3">
+            <span class="step-num flex h-8 w-8 items-center justify-center rounded-full border border-neutral-200 text-xs font-semibold text-gray-400">3</span>
+            <span class="hidden text-xs font-semibold uppercase tracking-widest text-gray-400 sm:block">Paiement</span>
+          </li>
+        </ol>
+      </header>
+
+      <!-- ── Grid 2 columnas (formulario + resumen) ── -->
+      <div class="grid grid-cols-1 items-start gap-12 lg:grid-cols-[1fr_400px]">
+
+        <!-- ═══ FORMULARIO ═══ -->
+        <section aria-labelledby="checkout-form-title">
+          <h2 id="checkout-form-title" class="sr-only">Formulaire de commande</h2>
+
+          <form id="checkout-form" novalidate>
+
+            <!-- ── PASO 1 · Contact ── -->
+            <section data-step="1">
+              <h3 class="mb-6 border-b border-neutral-200 pb-3 font-serif text-xl tracking-wide">1. Contact</h3>
+              <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                <div class="sm:col-span-2">
+                  <label for="contact-email" class="mb-1.5 block text-xs font-semibold uppercase tracking-widest text-slate-600">E-mail</label>
+                  <input
+                    id="contact-email"
+                    type="email"
+                    name="email"
+                    autocomplete="email"
+                    required
+                    placeholder="vous@exemple.com"
+                    class="w-full border border-gray-300 focus:border-slate-900 focus:ring-1 focus:ring-slate-900 rounded-none px-4 py-2 text-sm outline-none transition-all"
+                  >
+                </div>
+                <div class="sm:col-span-2">
+                  <label for="contact-phone" class="mb-1.5 block text-xs font-semibold uppercase tracking-widest text-slate-600">Téléphone</label>
+                  <input
+                    id="contact-phone"
+                    type="tel"
+                    name="phone"
+                    autocomplete="tel"
+                    required
+                    placeholder="+33 6 12 34 56 78"
+                    class="w-full border border-gray-300 focus:border-slate-900 focus:ring-1 focus:ring-slate-900 rounded-none px-4 py-2 text-sm outline-none transition-all"
+                  >
+                </div>
+              </div>
+            </section>
+
+            <!-- ── PASO 2 · Livraison ── -->
+            <section data-step="2" hidden>
+              <h3 class="mb-6 border-b border-neutral-200 pb-3 font-serif text-xl tracking-wide">2. Livraison</h3>
+              <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                <div class="sm:col-span-2">
+                  <label for="ship-name" class="mb-1.5 block text-xs font-semibold uppercase tracking-widest text-slate-600">Nom et prénom</label>
+                  <input
+                    id="ship-name"
+                    type="text"
+                    name="fullname"
+                    autocomplete="name"
+                    required
+                    placeholder="Camille Laurent"
+                    class="w-full border border-gray-300 focus:border-slate-900 focus:ring-1 focus:ring-slate-900 rounded-none px-4 py-2 text-sm outline-none transition-all"
+                  >
+                </div>
+                <div class="sm:col-span-2">
+                  <label for="ship-address" class="mb-1.5 block text-xs font-semibold uppercase tracking-widest text-slate-600">Adresse (n°, rue, étage, porte)</label>
+                  <input
+                    id="ship-address"
+                    type="text"
+                    name="address"
+                    autocomplete="street-address"
+                    required
+                    placeholder="12 Rue de Rivoli, 3e étage"
+                    class="w-full border border-gray-300 focus:border-slate-900 focus:ring-1 focus:ring-slate-900 rounded-none px-4 py-2 text-sm outline-none transition-all"
+                  >
+                </div>
+                <div>
+                  <label for="ship-city" class="mb-1.5 block text-xs font-semibold uppercase tracking-widest text-slate-600">Ville</label>
+                  <input
+                    id="ship-city"
+                    type="text"
+                    name="city"
+                    autocomplete="address-level2"
+                    required
+                    placeholder="Paris"
+                    class="w-full border border-gray-300 focus:border-slate-900 focus:ring-1 focus:ring-slate-900 rounded-none px-4 py-2 text-sm outline-none transition-all"
+                  >
+                </div>
+                <div>
+                  <label for="ship-postal" class="mb-1.5 block text-xs font-semibold uppercase tracking-widest text-slate-600">Code postal</label>
+                  <input
+                    id="ship-postal"
+                    type="text"
+                    name="postal"
+                    autocomplete="postal-code"
+                    required
+                    inputmode="numeric"
+                    placeholder="75001"
+                    class="w-full border border-gray-300 focus:border-slate-900 focus:ring-1 focus:ring-slate-900 rounded-none px-4 py-2 text-sm outline-none transition-all"
+                  >
+                </div>
+                <div>
+                  <label for="ship-region" class="mb-1.5 block text-xs font-semibold uppercase tracking-widest text-slate-600">Région / État</label>
+                  <input
+                    id="ship-region"
+                    type="text"
+                    name="region"
+                    autocomplete="address-level1"
+                    required
+                    placeholder="Île-de-France"
+                    class="w-full border border-gray-300 focus:border-slate-900 focus:ring-1 focus:ring-slate-900 rounded-none px-4 py-2 text-sm outline-none transition-all"
+                  >
+                </div>
+                <div>
+                  <label for="ship-country" class="mb-1.5 block text-xs font-semibold uppercase tracking-widest text-slate-600">Pays</label>
+                  <select
+                    id="ship-country"
+                    name="country"
+                    autocomplete="country-name"
+                    required
+                    class="w-full border border-gray-300 focus:border-slate-900 focus:ring-1 focus:ring-slate-900 rounded-none px-4 py-2 text-sm outline-none transition-all bg-white"
+                  >
+                    <option value="" selected disabled>Sélectionner</option>
+                    <option value="FR">France</option>
+                    <option value="ES">Espagne</option>
+                    <option value="DE">Allemagne</option>
+                    <option value="IT">Italie</option>
+                    <option value="BE">Belgique</option>
+                    <option value="PT">Portugal</option>
+                  </select>
+                </div>
+              </div>
+            </section>
+
+            <!-- ── PASO 3 · Facturation + Paiement ── -->
+            <section data-step="3" hidden>
+              <h3 class="mb-6 border-b border-neutral-200 pb-3 font-serif text-xl tracking-wide">3. Facturation &amp; Paiement</h3>
+
+              <!-- Facturation e impuestos -->
+              <h4 class="mb-4 text-xs font-semibold uppercase tracking-widest text-gray-500">Facturation et taxes</h4>
+              <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                <div>
+                  <label for="bill-nif" class="mb-1.5 block text-xs font-semibold uppercase tracking-widest text-slate-600">NIF / SIRET</label>
+                  <input
+                    id="bill-nif"
+                    type="text"
+                    name="nif"
+                    required
+                    placeholder="12345678A"
+                    class="w-full border border-gray-300 focus:border-slate-900 focus:ring-1 focus:ring-slate-900 rounded-none px-4 py-2 text-sm outline-none transition-all"
+                  >
+                </div>
+                <div>
+                  <label for="bill-company" class="mb-1.5 block text-xs font-semibold uppercase tracking-widest text-slate-600">Société <span class="normal-case text-gray-400">(optionnel, B2B)</span></label>
+                  <input
+                    id="bill-company"
+                    type="text"
+                    name="company"
+                    placeholder="Maison Conseil SAS"
+                    class="w-full border border-gray-300 focus:border-slate-900 focus:ring-1 focus:ring-slate-900 rounded-none px-4 py-2 text-sm outline-none transition-all"
+                  >
+                </div>
+              </div>
+
+              <!-- Datos de pago -->
+              <h4 class="mb-4 mt-8 text-xs font-semibold uppercase tracking-widest text-gray-500">Paiement par carte</h4>
+              <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                <div class="sm:col-span-2">
+                  <label for="pay-card" class="mb-1.5 block text-xs font-semibold uppercase tracking-widest text-slate-600">Numéro de carte</label>
+                  <input
+                    id="pay-card"
+                    type="text"
+                    name="card"
+                    autocomplete="cc-number"
+                    required
+                    inputmode="numeric"
+                    maxlength="19"
+                    pattern="[0-9][0-9 ]{11,18}"
+                    placeholder="1234 5678 9012 3456"
+                    class="w-full border border-gray-300 focus:border-slate-900 focus:ring-1 focus:ring-slate-900 rounded-none px-4 py-2 text-sm outline-none transition-all"
+                  >
+                </div>
+                <div>
+                  <label for="pay-exp" class="mb-1.5 block text-xs font-semibold uppercase tracking-widest text-slate-600">Date d'expiration</label>
+                  <input
+                    id="pay-exp"
+                    type="text"
+                    name="expiry"
+                    autocomplete="cc-exp"
+                    required
+                    inputmode="numeric"
+                    maxlength="5"
+                    pattern="(0[1-9]|1[0-2])/[0-9]{2}"
+                    placeholder="MM/AA"
+                    class="w-full border border-gray-300 focus:border-slate-900 focus:ring-1 focus:ring-slate-900 rounded-none px-4 py-2 text-sm outline-none transition-all"
+                  >
+                </div>
+                <div>
+                  <label for="pay-cvc" class="mb-1.5 block text-xs font-semibold uppercase tracking-widest text-slate-600">CVC</label>
+                  <input
+                    id="pay-cvc"
+                    type="text"
+                    name="cvc"
+                    autocomplete="cc-csc"
+                    required
+                    inputmode="numeric"
+                    maxlength="4"
+                    pattern="[0-9]{3,4}"
+                    placeholder="123"
+                    class="w-full border border-gray-300 focus:border-slate-900 focus:ring-1 focus:ring-slate-900 rounded-none px-4 py-2 text-sm outline-none transition-all"
+                  >
+                </div>
+              </div>
+
+              <p class="mt-6 text-xs text-gray-500">🔒 Démonstration — aucun paiement réel n'est effectué.</p>
+            </section>
+
+            <!-- ── Navegación entre pasos ── -->
+            <div class="mt-8 flex items-center justify-between gap-4 border-t border-neutral-200 pt-6">
+              <button
+                id="step-prev"
+                type="button"
+                class="border border-slate-900 text-slate-900 px-6 py-3 hover:bg-slate-900 hover:text-white transition-colors duration-200 uppercase text-xs font-semibold tracking-widest"
+              >Retour</button>
+              <button
+                id="step-next"
+                type="button"
+                class="bg-slate-900 text-white px-6 py-3 hover:bg-slate-800 transition-colors duration-200 uppercase text-xs font-semibold tracking-widest"
+              >Continuer</button>
+            </div>
+          </form>
+
+          <!-- ── Confirmación simulada ── -->
+          <div id="checkout-success" hidden class="border border-neutral-200 bg-stone-50 p-8 text-center">
+            <p class="font-serif text-2xl tracking-wide">Merci !</p>
+            <p class="mt-3 text-sm text-gray-600">Votre commande n° MA-2026-0148 a été confirmée (démonstration). Nous vous envoyons un e-mail de confirmation.</p>
+            <a
+              href="catalogue.html"
+              class="mt-6 inline-block bg-slate-900 px-6 py-3 text-xs font-semibold uppercase tracking-widest text-white transition-colors duration-200 hover:bg-slate-800"
+            >Continuer vos achats</a>
+          </div>
+        </section>
+
+        <!-- ═══ RESUMEN DEL PEDIDO ═══ -->
+        <aside aria-labelledby="order-summary-title" class="border border-neutral-200 bg-stone-50 p-6 lg:sticky lg:top-24">
+          <h2 id="order-summary-title" class="mb-6 font-serif text-xl tracking-wide">Votre commande</h2>
+
+          <ul class="space-y-5">
+            <li class="flex gap-4">
+              <img
+                src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=160&q=80"
+                alt="Blazer beige en laine"
+                class="h-20 w-16 flex-none object-cover"
+              >
+              <div class="flex flex-col text-sm">
+                <p class="font-semibold">Blazer en laine</p>
+                <p class="text-xs text-gray-500">Taille M · Qté 1</p>
+                <p class="mt-1">289,00 €</p>
+              </div>
+            </li>
+            <li class="flex gap-4">
+              <img
+                src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&w=160&q=80"
+                alt="Chemise blanche en popeline"
+                class="h-20 w-16 flex-none object-cover"
+              >
+              <div class="flex flex-col text-sm">
+                <p class="font-semibold">Chemise en popeline</p>
+                <p class="text-xs text-gray-500">Taille S · Qté 1</p>
+                <p class="mt-1">95,00 €</p>
+              </div>
+            </li>
+            <li class="flex gap-4">
+              <img
+                src="https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=160&q=80"
+                alt="Pantalon en laine gris"
+                class="h-20 w-16 flex-none object-cover"
+              >
+              <div class="flex flex-col text-sm">
+                <p class="font-semibold">Pantalon en laine</p>
+                <p class="text-xs text-gray-500">Taille 32 · Qté 1</p>
+                <p class="mt-1">145,00 €</p>
+              </div>
+            </li>
+          </ul>
+
+          <dl class="mt-8 space-y-3 border-t border-neutral-200 pt-6 text-sm">
+            <div class="flex items-center justify-between">
+              <dt class="text-gray-500">Sous-total</dt>
+              <dd>529,00 €</dd>
+            </div>
+            <div class="flex items-center justify-between">
+              <dt class="text-gray-500">TVA (20 %)</dt>
+              <dd>105,80 €</dd>
+            </div>
+            <div class="flex items-center justify-between border-t border-neutral-200 pt-3 text-base font-semibold">
+              <dt>Total</dt>
+              <dd>634,80 €</dd>
+            </div>
+          </dl>
+
+          <p class="mt-4 text-xs text-gray-500">Taxes incluses · Paiement sécurisé par carte bancaire.</p>
+        </aside>
+
+      </div>
+    </div>
   </main>
 
   <!-- ════════════════════════════════════════════════════════════
@@ -161,8 +486,9 @@
     </div>
   </footer>
 
-  <!-- JS vanilla mínimo: toggle menú móvil -->
+  <!-- JS vanilla mínimo: toggle menú móvil + gestión de pasos del checkout -->
   <script>
+    // ── Toggle menú móvil ──
     const toggle = document.getElementById('menu-toggle');
     const menu   = document.getElementById('mobile-menu');
     if (toggle && menu) {
@@ -172,6 +498,93 @@
         menu.hidden = expanded;
       });
     }
+
+    // ── Checkout en 3 pasos (validación básica de prototipo) ──
+    (function () {
+      const form      = document.getElementById('checkout-form');
+      const steps     = Array.from(form.querySelectorAll('section[data-step]'));
+      const indicators = document.querySelectorAll('[data-step-indicator]');
+      const lines      = document.querySelectorAll('[data-step-line]');
+      const prevBtn    = document.getElementById('step-prev');
+      const nextBtn    = document.getElementById('step-next');
+      const success    = document.getElementById('checkout-success');
+      let current      = 0;
+
+      const TOTAL = steps.length;
+
+      function render() {
+        steps.forEach((sec, i) => { sec.hidden = i !== current; });
+        indicators.forEach((el, i) => {
+          const num = el.querySelector('.step-num');
+          const txt = el.querySelector('span:not(.step-num)');
+          const active = i <= current;
+          num.classList.toggle('bg-slate-900', active);
+          num.classList.toggle('text-white', active);
+          num.classList.toggle('border-slate-900', active);
+          num.classList.toggle('text-gray-400', !active);
+          num.classList.toggle('border-neutral-200', !active);
+          el.classList.toggle('text-slate-900', active);
+          if (txt) txt.classList.toggle('text-slate-900', active);
+        });
+        lines.forEach((line, i) => {
+          const done = i < current;
+          line.classList.toggle('bg-slate-900', done);
+          line.classList.toggle('bg-neutral-200', !done);
+        });
+        prevBtn.hidden = current === 0;
+        nextBtn.textContent = current === TOTAL - 1 ? 'Payer 634,80 €' : 'Continuer';
+      }
+
+      function validateStep(index) {
+        const sec = steps[index];
+        const fields = Array.from(sec.querySelectorAll('input[required], select[required]'));
+        let ok = true;
+        fields.forEach((field) => {
+          const valid = field.checkValidity() && field.value.trim() !== '';
+          field.classList.toggle('border-red-500', !valid);
+          field.classList.toggle('border-gray-300', valid);
+          if (!valid) ok = false;
+        });
+        return ok;
+      }
+
+      nextBtn.addEventListener('click', () => {
+        if (!validateStep(current)) return;
+        if (current < TOTAL - 1) {
+          current += 1;
+          render();
+        } else {
+          form.hidden = true;
+          success.hidden = false;
+          success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      });
+
+      prevBtn.addEventListener('click', () => {
+        current = Math.max(0, current - 1);
+        render();
+      });
+
+      // Limpia el estado de error al escribir
+      form.addEventListener('input', (e) => {
+        if (e.target.matches('input, select')) {
+          e.target.classList.remove('border-red-500');
+          if (!e.target.classList.contains('border-gray-300')) {
+            e.target.classList.add('border-gray-300');
+          }
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (form.hidden) return;
+        if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          nextBtn.click();
+        }
+      });
+
+      render();
+    })();
   </script>
 </body>
 </html>
